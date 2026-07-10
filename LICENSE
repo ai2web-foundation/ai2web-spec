@@ -1,0 +1,29 @@
+AI2Web Protocol Specification & Documentation
+
+Copyright (c) 2026 AI2Web Foundation
+
+This work - the AI2Web (`ai2w`) protocol specification, JSON Schema, RFCs, and
+documentation in this directory - is licensed under the
+
+    Creative Commons Attribution 4.0 International License (CC-BY-4.0)
+
+SPDX-License-Identifier: CC-BY-4.0
+
+You are free to:
+  • Share  - copy and redistribute the material in any medium or format
+  • Adapt  - remix, transform, and build upon the material for any purpose,
+             even commercially
+
+Under the following terms:
+  • Attribution - You must give appropriate credit to the AI2Web Foundation,
+    provide a link to the license, and indicate if changes were made.
+
+The full legal text is available at:
+    https://creativecommons.org/licenses/by/4.0/legalcode
+
+A human-readable summary:
+    https://creativecommons.org/licenses/by/4.0/
+
+Rationale: the specification is licensed permissively so that anyone may build
+a conformant AI2Web implementation. The reference CODE is licensed under MIT
+(see the repository root LICENSE).
