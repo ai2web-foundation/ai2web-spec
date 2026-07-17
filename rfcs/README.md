@@ -18,6 +18,12 @@ All changes to protocol behaviour go through an RFC (copy [`rfc-template.md`](rf
 | [0009](rfc-0009-privacy-audit-and-retention.md) | Privacy, Audit & Data Retention | public-only discovery, personal-data actions, audit logging, retention and data minimisation |
 | [0010](rfc-0010-extension-and-namespace-registry.md) | Extension & Namespace Registry | `x-<namespace>` extensions, reserved names, the `extensions` module, a collision-avoiding registry |
 | [0011](rfc-0011-versioning-deprecation-and-compatibility.md) | Versioning, Deprecation & Compatibility | SemVer, version negotiation, the `deprecated` marker, additive-vs-breaking rules, no insecure downgrade |
+| [0012](rfc-0012-governance-usage-and-legal.md) | Governance, Usage Policy & Legal Transparency | enforced `governance` (rate limits, data scope, consent mode, audit); declarative `usage_policy` and `legal`/transparency metadata |
+| [0013](rfc-0013-agent-identity-and-verification.md) | Agent Identity & Verification | declaring an agent-identity requirement; assurance levels; verification via HTTP Message Signatures (RFC 9421); design-first |
+| [0014](rfc-0014-capability-bindings-intent-and-knowledge.md) | Capability Bindings, Intent & Knowledge | per-action `intent`; multi-`bindings` with priority + fallback; `knowledge` grounding sources; the `critical` risk tier |
+| [0015](rfc-0015-manifest-interoperability-and-profiles.md) | Manifest Interoperability & Export Profiles | one canonical model, many representations/surfaces; per-agent profiles (presentation not policy); composing with external services |
+| [0016](rfc-0016-signals-and-analytics.md) | Signals & Analytics Events | server-side, personal-data-free interaction events seeded by `audit_ref`; missed-demand; local-first with opt-in aggregation |
+| [0017](rfc-0017-trust-and-reputation.md) | Trust & Reputation | design-first: verified-transaction-grounded trust signals, two-sided attestation, neutral aggregation (no implementation until reviewed) |
 
 ## Reference implementations (project, non-normative)
 

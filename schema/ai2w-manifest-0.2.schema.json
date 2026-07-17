@@ -1,0 +1,516 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai2web.dev/schema/ai2w-manifest-0.2.schema.json",
+  "title": "AI2Web Manifest",
+  "description": "The ai2w capability model manifest, served at /ai2w. Spec v0.2 (additive over v0.1).",
+  "type": "object",
+  "required": [
+    "protocol",
+    "version",
+    "site",
+    "capabilities"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "protocol": {
+      "const": "ai2w"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
+    },
+    "site": {
+      "type": "object",
+      "required": [
+        "name",
+        "url",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "jurisdiction": {
+          "type": "string"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "logo": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "additionalProperties": true
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "legal_name": {
+          "type": "string"
+        },
+        "privacy_policy": {
+          "type": "string",
+          "format": "uri"
+        },
+        "terms": {
+          "type": "string",
+          "format": "uri"
+        },
+        "support_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "agent": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "allow_anonymous": {
+              "type": "boolean"
+            },
+            "methods": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "http_message_signatures",
+                  "oauth_client",
+                  "attestation"
+                ]
+              }
+            },
+            "min_level": {
+              "enum": [
+                "anonymous",
+                "identified",
+                "verified"
+              ]
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "capabilities": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "object",
+            "required": [
+              "enabled"
+            ],
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              },
+              "endpoint": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "transports": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "auth": {
+      "type": "object",
+      "required": [
+        "methods"
+      ],
+      "properties": {
+        "methods": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "none",
+              "oauth2",
+              "signed_request",
+              "session",
+              "api_key"
+            ]
+          }
+        },
+        "oauth2": {
+          "type": "object",
+          "properties": {
+            "authorization_url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "token_url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "pkce": {
+              "type": "boolean"
+            },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "consent": {
+      "type": "object",
+      "properties": {
+        "requires_user_approval_for": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/action"
+      }
+    },
+    "events": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        },
+        "subscribe": {
+          "type": "string"
+        },
+        "delivery": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "webhook",
+              "poll",
+              "sse"
+            ]
+          }
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+\\.[a-z0-9_]+$"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "agent_service": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "supported_intents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "rate_limits": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "support": {
+          "type": "string"
+        },
+        "security": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "rate_limits": {
+          "type": "object",
+          "properties": {
+            "requests": {
+              "type": "integer"
+            },
+            "window_seconds": {
+              "type": "integer"
+            },
+            "per_action": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "required": [
+                  "requests",
+                  "window_seconds"
+                ],
+                "properties": {
+                  "requests": {
+                    "type": "integer"
+                  },
+                  "window_seconds": {
+                    "type": "integer"
+                  }
+                },
+                "additionalProperties": true
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        "data_scope": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "consent_mode": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "none",
+              "preview",
+              "explicit",
+              "authenticated"
+            ]
+          }
+        },
+        "audit": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "usage_policy": {
+      "type": "object",
+      "properties": {
+        "bulk_extraction": {
+          "type": "boolean"
+        },
+        "price_monitoring": {
+          "type": "boolean"
+        },
+        "content_reproduction": {
+          "type": "boolean"
+        },
+        "model_training": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "legal": {
+      "type": "object",
+      "properties": {
+        "terms_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "privacy_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "jurisdiction": {
+          "type": "string"
+        },
+        "ai_transparency": {
+          "type": "boolean"
+        },
+        "ai_risk_classification": {
+          "enum": [
+            "minimal",
+            "limited",
+            "high"
+          ]
+        },
+        "data_processing_basis": {
+          "type": "string"
+        },
+        "restricted_uses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "knowledge": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "ref"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "catalog",
+              "policy",
+              "faq",
+              "feed",
+              "index"
+            ]
+          },
+          "ref": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "$defs": {
+    "action": {
+      "type": "object",
+      "required": [
+        "name",
+        "description",
+        "method",
+        "endpoint",
+        "requires_auth",
+        "requires_user_approval",
+        "risk",
+        "input_schema"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "description": {
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "requires_auth": {
+          "type": "boolean"
+        },
+        "requires_user_approval": {
+          "type": "boolean"
+        },
+        "risk": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "input_schema": {
+          "type": "object"
+        },
+        "output_schema": {
+          "type": "object"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "kind",
+              "ref"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "rest",
+                  "mcp",
+                  "openapi",
+                  "graphql",
+                  "redirect",
+                  "html"
+                ]
+              },
+              "ref": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "integer"
+              },
+              "fallback_only": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

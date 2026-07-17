@@ -23,6 +23,7 @@ AI2Web is a **protocol + specification**. It deliberately **does not define a tr
 | [`schema/ai2w-manifest-0.1.schema.json`](schema/ai2w-manifest-0.1.schema.json) | JSON Schema - the machine-readable source of truth for validation. |
 | [`examples/`](examples/) | Reference manifests: ecommerce, SaaS, booking/services, publisher. |
 | [`rfcs/`](rfcs/) | RFC-0000–0007 (architecture/principles, discovery, action/event schema, auth/authz, A2A, commerce/checkout-transports, adapter conformance, support & post-purchase) + template. Implementation-neutral. See [`rfcs/README.md`](rfcs/README.md). |
+| [`guides/`](guides/) | Practical deployment guides. [`cloudflare.md`](guides/cloudflare.md): serving AI2Web on Cloudflare Workers/Pages and composing with platform AI features. |
 
 ## The one primitive everything hangs off
 
