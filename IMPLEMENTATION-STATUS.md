@@ -33,7 +33,7 @@ Started 2026-07-18 during the "complete the project" build. `✅ done · 🟡 pa
 | Directory verification (fetch `/.well-known/ai2w` server-side, validate, match origin, then `verified`) | ✅ | **Batch 1** done — `/register` ignores submitted data, fetches + origin-matches |
 | Register anti-spam (rate limit, no-overwrite, size cap, verify-before-store) | ✅ | **Batch 1** done — per-IP rate limit + verify-before-store (19 tests pass) |
 | Directory health checks (cron re-fetch + `health`) | ✅ | **Batch 1** done — `scheduled()` every 6h re-verifies + demotes |
-| Submission UX — validator "Add to Discovery Network" funnel (backend registers, not raw input) | ❌ | **Batch 2** |
+| Submission UX — validator "Add to Discovery Network" funnel (backend registers, not raw input) | ✅ | **Batch 2** done — validator shows "Add to directory" after a live scan, POSTs only `{url}` |
 | Auto-discovery — SDK server optionally announces/pings the directory on serve (opt-in) | ❌ | **Batch 3** |
 | Site + docs: explain `connector.ai2web.dev/mcp` and `directory.ai2web.dev/register`; mention validator funnel | ❌ | **Batch 4** |
 | Analytics (RFC-0016): event model + `onEvent` sink in SDK server; Analytics Engine adapter; WP; dashboard | ❌ | **Batch 5** |
@@ -43,3 +43,4 @@ Started 2026-07-18 during the "complete the project" build. `✅ done · 🟡 pa
 ## Batch log
 - **Batch 0 (2026-07-18):** RFC gap analysis + this tracker. ✅
 - **Batch 1 (2026-07-18):** Directory verification-first `/register` (fetches the live manifest, validates, requires origin match, ignores submitted data), per-IP rate limit, `scheduled()` health cron (6h), hardened SSRF guard, schema (`last_checked` + `register_log`). 19 integration tests pass. NOT yet deployed (user deploys; needs `wrangler d1 execute` for the schema migration + `wrangler deploy`). ✅
+- **Batch 2 (2026-07-18):** Validator "Add to Discovery Network" funnel — after a live URL scan the result card offers to list the site; the browser POSTs only `{url}` to `directory.ai2web.dev/register` (backend re-fetches + verifies; hidden for the paste path). ✅
