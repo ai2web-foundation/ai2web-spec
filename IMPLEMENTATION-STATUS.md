@@ -35,7 +35,7 @@ Started 2026-07-18 during the "complete the project" build. `✅ done · 🟡 pa
 | Directory health checks (cron re-fetch + `health`) | ✅ | **Batch 1** done — `scheduled()` every 6h re-verifies + demotes |
 | Submission UX — validator "Add to Discovery Network" funnel (backend registers, not raw input) | ✅ | **Batch 2** done — validator shows "Add to directory" after a live scan, POSTs only `{url}` |
 | Auto-discovery - SDK server optionally announces/pings the directory on serve (opt-in) | ✅ | **Batch 3** done - `announce` option + `announceToDirectory()`, fires once per origin |
-| Site + docs: explain `connector.ai2web.dev/mcp` and `directory.ai2web.dev/register`; mention validator funnel | ❌ | **Batch 4** |
+| Site + docs: explain `connector.ai2web.dev/mcp` and `directory.ai2web.dev/register`; mention validator funnel | ✅ | **Batch 4** done - two new docs sections (Discovery Network + Use the whole network) |
 | Analytics (RFC-0016): event model + `onEvent` sink in SDK server; Analytics Engine adapter; WP; dashboard | ❌ | **Batch 5** |
 | Network trust scoring (RFC-0017): two-sided attestation + corroboration + score | ❌ | **Batch 6** |
 | Remaining RFC 🟡 hardening (0004/0009/0010/0011/0012/0013/0014) | ❌ | **Batch 7** |
@@ -45,3 +45,4 @@ Started 2026-07-18 during the "complete the project" build. `✅ done · 🟡 pa
 - **Batch 1 (2026-07-18):** Directory verification-first `/register` (fetches the live manifest, validates, requires origin match, ignores submitted data), per-IP rate limit, `scheduled()` health cron (6h), hardened SSRF guard, schema (`last_checked` + `register_log`). 19 integration tests pass. NOT yet deployed (user deploys; needs `wrangler d1 execute` for the schema migration + `wrangler deploy`). ✅
 - **Batch 2 (2026-07-18):** Validator "Add to Discovery Network" funnel — after a live URL scan the result card offers to list the site; the browser POSTs only `{url}` to `directory.ai2web.dev/register` (backend re-fetches + verifies; hidden for the paste path). ✅
 - **Batch 3 (2026-07-18):** Auto-discovery announce in `@ai2web/server` - opt-in `announce` option auto-pings `directory.ai2web.dev/register` once per origin on first discovery serve; exported `announceToDirectory(url)` helper (origin-only, https-only, best-effort). 7 tests pass. ✅
+- **Batch 4 (2026-07-18):** Docs surface the network - "Discovery Network" section (get listed via validator button / SDK `announce` / `curl POST /register`, all verified server-side) + "Use the whole network" section (add `connector.ai2web.dev/mcp`; find_sites/describe_site/call_site_action). Spacing guard caught + fixed 2 glue bugs. ✅
