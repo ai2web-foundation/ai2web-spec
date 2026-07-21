@@ -9,6 +9,8 @@
 
 # AI2Web Specification (`ai2w`)
 
+[![AI2Web on Launchpadly - Product of the Week (Gold)](https://launchpadly.co/embed/badges/startup/ai2web.svg?variant=product-week-gold)](https://launchpadly.co/startup/ai2web?ref=badge)
+
 > **Describe your website once. AI2Web makes it understandable to every AI.**
 
 This repository is the open, vendor-neutral **AI2Web protocol** - the canonical capability model that lets any website describe *what it is*, *what it knows*, *what it can do*, *how to authenticate*, *how to communicate*, and *what events an agent can subscribe to*, then **negotiate** a capability set with an AI agent.
